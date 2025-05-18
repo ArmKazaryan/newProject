@@ -3,52 +3,45 @@ import ShoeBlock from "./components/Card/ShoeBlock";
 import NoBookMark from "./NoBookMarks";
 import axios from "axios";
 
-function BookMarks({ closeBookmarks, onAddToCart }) {
-  const [bookmarks, setBookmarks] = useState([]);
+function BookMarks({ closeBookmarks, onAddToCart, bookmarks, setBookmarks }) {
+  // Если хочешь, можешь оставить загрузку из API здесь, либо получать закладки через пропсы
 
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      try {
-        const res = await axios.get("http://localhost:8000/bookmarks");
-        setBookmarks(res.data);
-      } catch (err) {
-        console.error("Ошибка при загрузке закладок", err);
-      }
-    };
+  // Функция для управления лайками (удаление из закладок)
+  const handleLike = (item) => {
+    const updatedBookmarks = bookmarks.filter(
+      (bookmark) => bookmark.id !== item.id
+    );
+    setBookmarks(updatedBookmarks);
 
-    fetchBookmarks();
-  }, []);
+    // Если есть API - отправь туда запрос на удаление
+    // axios.delete(`http://localhost:8000/bookmarks/${item.id}`).catch(console.error);
+  };
 
   return (
     <div className="MyPurchasesList">
       <div className="MyPurchases">
-        {bookmarks.length === 0 ? (
-          ""
-        ) : (
-          <div onClick={closeBookmarks} className="BackFromPurchases">
-            <img src="/imgs/back.png" alt="Назад" />
-          </div>
-        )}
+        <div onClick={closeBookmarks} className="BackFromPurchases">
+          <img src="/imgs/back.png" alt="Назад" />
+        </div>
         <div>
           <h2>Мои закладки</h2>
         </div>
       </div>
-      <div className="noBM">
+      <div className="MyPurchasesBlock">
         {bookmarks.length === 0 ? (
-          <NoBookMark closeBookmarks={closeBookmarks} />
+          <NoBookMark />
         ) : (
-          <div className="MyPurchasesBlock">
-            <div className="PurchasedCards">
-              {bookmarks.map((obj) => (
-                <ShoeBlock
-                  key={obj.id}
-                  {...obj}
-                  isLikedItem={true}
-                  liked={() => {}}
-                  onAddToCart={onAddToCart}
-                />
-              ))}
-            </div>
+          <div className="PurchasedCards">
+            {bookmarks.map((obj) => (
+              <ShoeBlock
+                key={obj.id}
+                {...obj}
+                isLikedItem={true}
+                liked={handleLike} // чтобы можно было убрать из закладок
+                onAddToCart={onAddToCart} // чтобы добавить в корзину
+                readOnly={false} // чтобы кнопки были активны
+              />
+            ))}
           </div>
         )}
       </div>

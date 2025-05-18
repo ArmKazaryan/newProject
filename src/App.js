@@ -22,7 +22,6 @@ function App() {
   const [goToProfile, setGoToProfile] = useState(false);
   const [purchased, setPurchased] = useState(false);
   const [orderedItems, setOrderedItems] = useState([]);
-  const [likedItem, setLikedItem] = useState([]);
 
   const onClickToLogo = () => {
     setGoToBookmarks(false);

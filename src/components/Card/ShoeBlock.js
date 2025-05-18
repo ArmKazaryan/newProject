@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function ShoeBlock({
   id,
@@ -14,36 +14,31 @@ function ShoeBlock({
   const [isLiked, setIsLiked] = useState(isLikedItem);
 
   const onPlus = () => {
-    if (!readOnly) {
-      onAddToCart({ id, title, imgUrl, price });
-      setIsAdded(!isAdded);
-    }
+    if (readOnly) return;
+    onAddToCart({ id, title, imgUrl, price });
+    setIsAdded(!isAdded);
   };
 
   const onLike = () => {
-    if (!readOnly) {
-      setIsLiked(!isLiked);
-      liked({ id, title, imgUrl, price });
-    }
+    if (readOnly) return;
+    setIsLiked(!isLiked);
+    liked({ id, title, imgUrl, price });
   };
 
   return (
-    <div className={!isLiked ? "ShoeBlockWH" : "ShoeBlock"}>
-      <img className="ShoeOptions" src={imgUrl} alt=""></img>
+    <div className="ShoeBlock">
+      <img className="ShoeOptions" src={imgUrl} alt={title} />
 
-      {/* Показываем сердечко, только если не readOnly  */}
-      {!readOnly && (
-        <div
-          onClick={onLike}
-          className={isLiked ? "likeBorder" : "likeBorderPink"}
-        >
-          <img
-            className="like"
-            src={isLiked ? "/imgs/like.png" : "/imgs/Vector.svg"}
-            alt=""
-          />
-        </div>
-      )}
+      <div
+        onClick={onLike}
+        className={!isLiked ? "likeBorder" : "likeBorderPink"}
+      >
+        <img
+          className="like"
+          src={isLiked ? "/imgs/Vector.svg" : "/imgs/like.png"}
+          alt={isLiked ? "Не лайкнуто" : "Лайкнуто"}
+        />
+      </div>
 
       <div className="description">
         <p className="shoeName">{title}</p>
@@ -55,7 +50,10 @@ function ShoeBlock({
 
           {!readOnly && (
             <div onClick={onPlus} className="PlusBorder">
-              <img src={isAdded ? "/imgs/fav.svg" : "/imgs/plus.png"} alt="" />
+              <img
+                src={isAdded ? "/imgs/fav.svg" : "/imgs/plus.png"}
+                alt="Добавить"
+              />
             </div>
           )}
         </div>
