@@ -28,6 +28,7 @@ function MyPurchases({ closeProfile, orderedItems = [] }) {
                 isInCart={false}
                 onAddToCart={() => {}}
                 liked={() => {}}
+                readOnly={true}
               />
             ))}
           </div>

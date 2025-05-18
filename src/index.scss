@@ -230,6 +230,19 @@ header {
   transition: transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
 }
 
+.ShoeBlockWH {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  padding-top: 20px;
+  width: 210px;
+  height: 240px;
+  border-radius: 40px;
+  border: 1px solid #f8f8f8;
+  background-color: white;
+  transition: transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
 .content {
   display: flex;
   justify-content: center;
@@ -254,6 +267,23 @@ header {
   transition: box-shadow 0.5 ease-in-out;
   border-radius: 7px;
   border: 1px solid #f8f8f8;
+  cursor: pointer;
+}
+
+.likeBorderPink {
+  position: absolute;
+  left: 29px;
+  top: 29px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 3px;
+  transition: box-shadow 0.5 ease-in-out;
+  border-radius: 7px;
+  border: 1px solid #f8f8f8;
+  background-color: #fef0f0;
   cursor: pointer;
 }
 
@@ -499,11 +529,12 @@ header {
   flex-wrap: wrap;
 }
 
-.NoOrders {
-  display: flex;
-  justify-content: center;
-  margin-top: 233px;
-}
+// .NoOrders {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 233px;
+// }
 
 .NoOrdersBlock {
   display: flex;
@@ -515,6 +546,13 @@ header {
 .NoOrdersBlock > img {
   width: 70px;
   height: 70px;
+}
+
+.noBM {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 390px;
 }
 
 .TextBlock {

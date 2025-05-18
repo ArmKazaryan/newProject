@@ -7,39 +7,43 @@ function ShoeBlock({
   price,
   onAddToCart,
   liked,
-  isInCart,
   isLikedItem,
+  readOnly = false,
 }) {
-  const [isAdded, setIsAdded] = useState(isInCart);
+  const [isAdded, setIsAdded] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikedItem);
 
-  useEffect(() => {
-    setIsAdded(isInCart);
-  }, [isInCart]);
-
-  useEffect(() => {
-    setIsLiked(isLikedItem);
-  }, [isLikedItem]);
-
   const onPlus = () => {
-    onAddToCart({ id, title, imgUrl, price });
-    setIsAdded(!isAdded);
+    if (!readOnly) {
+      onAddToCart({ id, title, imgUrl, price });
+      setIsAdded(!isAdded);
+    }
   };
 
   const onLike = () => {
-    liked({ id, title, imgUrl, price });
+    if (!readOnly) {
+      setIsLiked(!isLiked);
+      liked({ id, title, imgUrl, price });
+    }
   };
 
   return (
-    <div className="ShoeBlock">
-      <img className="ShoeOptions" src={imgUrl} alt={title} />
-      <div onClick={onLike} className="likeBorder">
-        <img
-          className="like"
-          src={isLikedItem ? "/imgs/like.png" : "/imgs/Vector.svg"}
-          alt="like"
-        />
-      </div>
+    <div className={!isLiked ? "ShoeBlockWH" : "ShoeBlock"}>
+      <img className="ShoeOptions" src={imgUrl} alt=""></img>
+
+      {/* Показываем сердечко, только если не readOnly  */}
+      {!readOnly && (
+        <div
+          onClick={onLike}
+          className={isLiked ? "likeBorder" : "likeBorderPink"}
+        >
+          <img
+            className="like"
+            src={isLiked ? "/imgs/like.png" : "/imgs/Vector.svg"}
+            alt=""
+          />
+        </div>
+      )}
 
       <div className="description">
         <p className="shoeName">{title}</p>
@@ -48,16 +52,12 @@ function ShoeBlock({
             <p className="ShoePrice">ЦЕНА: </p>
             <b>{price} руб.</b>
           </div>
-          <div
-            onClick={onPlus}
-            className="PlusBorder"
-            style={{ cursor: "pointer" }}
-          >
-            <img
-              src={isAdded ? "/imgs/fav.svg" : "/imgs/plus.png"}
-              alt="add-to-cart"
-            />
-          </div>
+
+          {!readOnly && (
+            <div onClick={onPlus} className="PlusBorder">
+              <img src={isAdded ? "/imgs/fav.svg" : "/imgs/plus.png"} alt="" />
+            </div>
+          )}
         </div>
       </div>
     </div>

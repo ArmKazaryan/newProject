@@ -1,4 +1,4 @@
-function NoBookMarks() {
+function NoBookMarks({ closeBookmarks }) {
   return (
     <div className="NoOrders">
       <div className="NoOrdersBlock">
@@ -8,7 +8,7 @@ function NoBookMarks() {
             <h2>Закладок нет :(</h2>
             <p>Вы ничего не добавляли в закладки</p>
           </div>
-          <button>
+          <button onClick={closeBookmarks}>
             <img src="/imgs/left-arrow.svg"></img>
             Вернуться назад
           </button>

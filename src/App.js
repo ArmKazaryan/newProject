@@ -223,7 +223,7 @@ function App() {
           setOrderedItems={setOrderedItems}
         />
       ) : goToBookmarks ? (
-        <BookMarks closeBookmarks={closeBookmarks} />
+        <BookMarks closeBookmarks={closeBookmarks} onAddToCart={onAddToCart} />
       ) : loading ? (
         <div className="forSkeleton">
           {[...Array(8)].map((_, index) => (
