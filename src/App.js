@@ -7,6 +7,7 @@ import Rightpanel from "./Right-panel";
 import EmptyShoeBlock from "./components/Card/EmptyShoeBlock";
 import BookMarks from "./BookMarks";
 import MyPurchases from "./MyPurchases";
+import NoBookMarks from "./NoBookMarks";
 
 function App() {
   const dbUrl = "http://localhost:8000/cart-items";
@@ -222,7 +223,12 @@ function App() {
           setOrderedItems={setOrderedItems}
         />
       ) : goToBookmarks ? (
-        <BookMarks closeBookmarks={closeBookmarks} onAddToCart={onAddToCart} />
+        <BookMarks
+          closeBookmarks={closeBookmarks}
+          onAddToCart={onAddToCart}
+          bookmarks={addToBookmark}
+          setBookmarks={setAddToBookmark}
+        />
       ) : loading ? (
         <div className="forSkeleton">
           {[...Array(8)].map((_, index) => (

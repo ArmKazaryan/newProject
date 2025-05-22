@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import ShoeBlock from "./components/Card/ShoeBlock";
 import NoBookMark from "./NoBookMarks";
 import axios from "axios";
+import NoBookMarks from "./NoBookMarks";
 
 function BookMarks({ closeBookmarks, onAddToCart, bookmarks, setBookmarks }) {
-  // Если хочешь, можешь оставить загрузку из API здесь, либо получать закладки через пропсы
-
-  // Функция для управления лайками (удаление из закладок)
   const handleLike = (item) => {
     const updatedBookmarks = bookmarks.filter(
       (bookmark) => bookmark.id !== item.id
     );
     setBookmarks(updatedBookmarks);
 
-    // Если есть API - отправь туда запрос на удаление
-    // axios.delete(`http://localhost:8000/bookmarks/${item.id}`).catch(console.error);
+    axios
+      .delete(`http://localhost:8000/bookmarks/${item.id}`)
+      .catch(console.error);
   };
 
   return (
@@ -28,8 +27,8 @@ function BookMarks({ closeBookmarks, onAddToCart, bookmarks, setBookmarks }) {
         </div>
       </div>
       <div className="MyPurchasesBlock">
-        {bookmarks.length === 0 ? (
-          <NoBookMark />
+        {bookmarks && bookmarks.length === 0 ? (
+          <NoBookMarks closeBookmarks={closeBookmarks} />
         ) : (
           <div className="PurchasedCards">
             {bookmarks.map((obj) => (

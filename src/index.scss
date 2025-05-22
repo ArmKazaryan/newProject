@@ -519,6 +519,8 @@ header {
 .MyPurchasesBlock {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 50px;
   gap: 40px;
 }
 
@@ -570,11 +572,14 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 }
 
 .TextBlockText > p {
   font-family: "Inter", sans-serif;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .TextBlockText > h2 {

@@ -18,7 +18,23 @@ function MyPurchases({ closeProfile, orderedItems = [] }) {
       </div>
       <div className="MyPurchasesBlock">
         {orderedItems.length === 0 ? (
-          <p>У вас пока нет покупок.</p>
+          <div className="NoOrders">
+            <div className="NoOrdersBlock">
+              <img src="/imgs/sad smile.png"></img>
+              <div className="TextBlock">
+                <div className="TextBlockText">
+                  <h2> У вас нет заказов :(</h2>
+                  <p>
+                    Вы нищеброд? <span>Оформите хотя бы один заказ.</span>
+                  </p>
+                </div>
+                <button onClick={closeProfile}>
+                  <img src="/imgs/left-arrow.svg"></img>
+                  Вернуться назад
+                </button>
+              </div>
+            </div>
+          </div>
         ) : (
           <div className="PurchasedCards">
             {orderedItems.map((item) => (

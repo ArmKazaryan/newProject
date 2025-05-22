@@ -29,16 +29,18 @@ function ShoeBlock({
     <div className="ShoeBlock">
       <img className="ShoeOptions" src={imgUrl} alt={title} />
 
-      <div
-        onClick={onLike}
-        className={!isLiked ? "likeBorder" : "likeBorderPink"}
-      >
-        <img
-          className="like"
-          src={isLiked ? "/imgs/Vector.svg" : "/imgs/like.png"}
-          alt={isLiked ? "Не лайкнуто" : "Лайкнуто"}
-        />
-      </div>
+      {!readOnly && (
+        <div
+          onClick={onLike}
+          className={!isLiked ? "likeBorder" : "likeBorderPink"}
+        >
+          <img
+            className="like"
+            src={isLiked ? "/imgs/Vector.svg" : "/imgs/like.png"}
+            alt={isLiked ? "Не лайкнуто" : "Лайкнуто"}
+          />
+        </div>
+      )}
 
       <div className="description">
         <p className="shoeName">{title}</p>
